@@ -46,4 +46,8 @@ jobs:
 
       - name: Upload to Telegram
         run: |
-         echo "${{ secrets.MT_API }}" > sending ; chmod +x sending ; ./sending file ~/any/buildtestC2.zip "Cassia $(date)"
+         curl -s -X POST "https://api.telegram.org/bot${{ secrets.TG_TOKEN }}/sendDocument" \
+         -F chat_id="${{ secrets.CHAT_ID }}" \
+         -F message_thread_id="${{ secrets.TOPIC_ID }}" \
+         -F caption="$(echo -e "$(date)\n\nRMX1941")" \
+         -F document=@"/home/runner/any/buildtestC2.zip" > /dev/null 2>&1
