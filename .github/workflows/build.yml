@@ -40,7 +40,7 @@ jobs:
 
       - name: anykernel ~ zipping
         run: |
-         git clone https://github.com/Frostleaft07/AnyKernel3 ~/any/ && \
+         git clone https://github.com/Frostleaft07/AnyKernel3 -b rmx1941 ~/any/ && \
          cp -r ~/out/arch/arm64/boot/Image.gz-dtb ~/any/ && \
          cd ~/any/ && zip -r9 buildtestC2.zip *
 
