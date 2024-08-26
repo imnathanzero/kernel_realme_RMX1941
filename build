@@ -1,6 +1,7 @@
 #!/bin/bash
 export KBUILD_BUILD_USER=Frostleaft07
 export KBUILD_BUILD_HOST=Darkness
+export LOCALVERSION="-Endfield 🪐"
 echo $KBUILD_BUILD_USER
 echo $KBUILD_BUILD_HOST
 echo -e "done?"
