@@ -49,6 +49,7 @@ endif
     obj-y += wlan/adaptor/
     obj-y += wlan/core/gen4m/
     obj-y += gps/
+    obj-y += fmradio/
     # Do build-in for Makefile checking
     # export CONFIG_WLAN_DRV_BUILD_IN=y
 
