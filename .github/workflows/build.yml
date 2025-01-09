@@ -24,19 +24,19 @@ jobs:
 
       - name: setup package
         run: |
-         sudo apt-get update -y && sudo apt-get install dialog bash sed wget git curl zip tar jq expect make cmake automake autoconf llvm lld lldb clang gcc binutils bison perl gperf gawk flex bc python3 zstd openssl unzip cpio bc bison build-essential ccache liblz4-tool libsdl1.2-dev libstdc++6 libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zlib1g-dev libncurses5-dev bzip2 git gcc g++ libssl-dev gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi dos2unix kmod python2 -y
+         sudo apt-get update -y && sudo apt-get install -qq dialog bash sed wget git curl zip tar jq expect make cmake automake autoconf llvm lld lldb clang gcc binutils bison perl gperf gawk flex bc python3 zstd openssl unzip cpio bc bison build-essential ccache liblz4-tool libsdl1.2-dev libstdc++6 libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zlib1g-dev libncurses5-dev bzip2 git gcc g++ libssl-dev gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi dos2unix kmod python2 -y
+
+      - name: setup toolchain
+        run: |
+         bash tcsetup
 
       - name: cloning KernelSU
         run: |
-         curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s v0.9.5
-
-      - name: check clang version
-        run: |
-         clang -v
+         curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/refs/heads/next/kernel/setup.sh" | bash -s next
 
       - name: start up
         run: |
-         ./build
+          bash build
 
       - name: anykernel ~ zipping
         run: |
@@ -44,10 +44,12 @@ jobs:
          cp -r ~/out/arch/arm64/boot/Image.gz-dtb ~/any/ && \
          cd ~/any/ && zip -r9 buildtestC2.zip *
 
-      - name: Upload to Telegram
-        run: |
-         curl -s -X POST "https://api.telegram.org/bot${{ secrets.TG_TOKEN }}/sendDocument" \
-         -F chat_id="${{ secrets.CHAT_ID }}" \
-         -F message_thread_id="${{ secrets.TOPIC_ID }}" \
-         -F caption="$(echo -e "$(date)\n\nRMX1941/5 UI1")" \
-         -F document=@"/home/runner/any/buildtestC2.zip" > /dev/null 2>&1
+      - name: Upload to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+             ~/any/*.zip
+          name: build_kranul_yang_ke_${{ github.run_attempt }}
+          tag_name: ${{ github.run_id }}
+          body: |
+             kranul_test
