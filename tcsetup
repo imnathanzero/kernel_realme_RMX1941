@@ -1,0 +1,2 @@
+git clone --depth=1 https://gitlab.com/LeCmnGend/clang.git -b clang-19 ~/TC/proton-clang
+git clone --depth=1 https://github.com/P-Salik/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-gnu-7.5.git -b master ~/TC/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-gnu-7.5
