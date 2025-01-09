@@ -1,14 +1,17 @@
 #!/bin/bash
-export KBUILD_BUILD_USER=Frostleaft07
-export KBUILD_BUILD_HOST=Darkness
-export LOCALVERSION="-Endfield 🪐"
+export KBUILD_BUILD_USER="lain"
+export KBUILD_BUILD_HOST="iwakura"
+export LOCALVERSION="-#LetsAllLoveLain"
 echo $KBUILD_BUILD_USER
 echo $KBUILD_BUILD_HOST
 echo -e "done?"
-sleep 2s
+sleep 5s
+export PATH=~/TC/proton-clang/bin:${PATH}
+clang -v
 
-make CC=clang ARCH=arm64 O=~/out hatsune_defconfig
-make CC=clang LLVM=1 ARCH=arm64 O=~/out -j16 \
+make CC=clang ARCH=arm64 O=out hatsune_defconfig
+PATH="~/TC/proton-clang/bin:${PATH}" \
+make CC=clang LLVM=1 ARCH=arm64 O=out -j16 \
         HEADER_ARCH=arm64 \
         SUBARCH=arm64 \
         CXX=c++ \
@@ -20,6 +23,7 @@ make CC=clang LLVM=1 ARCH=arm64 O=~/out -j16 \
         HOSTCXX=clang++ \
         HOSTAR=llvm-ar \
         LLVM_IAS=1 \
-        CROSS_COMPILE=aarch64-linux-gnu- \
-        CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
+        HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument" \
+        CROSS_COMPILE=~/TC/gcc/bin/aarch64-linux-gnu- \
+        CROSS_COMPILE_ARM32=~/TC/gcc/bin/arm-linux-gnueabihf- \
         CLANG_TRIPLE=aarch64-linux-gnu-
