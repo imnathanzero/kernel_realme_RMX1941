@@ -1,7 +1,7 @@
 #!/bin/bash
-export KBUILD_BUILD_USER=Frostleaft07
-export KBUILD_BUILD_HOST=Darkness
-export LOCALVERSION="-Endfield 🪐"
+export KBUILD_BUILD_USER=Nathan
+export KBUILD_BUILD_HOST=WasHere
+export LOCALVERSION="-SE_EK_SS"
 echo $KBUILD_BUILD_USER
 echo $KBUILD_BUILD_HOST
 echo -e "done?"
@@ -20,6 +20,7 @@ make CC=clang LLVM=1 ARCH=arm64 O=~/out -j16 \
         HOSTCXX=clang++ \
         HOSTAR=llvm-ar \
         LLVM_IAS=1 \
-        CROSS_COMPILE=aarch64-linux-gnu- \
-        CROSS_COMPILE_ARM32=arm-linux-gnueabi- \
-        CLANG_TRIPLE=aarch64-linux-gnu-
+        HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument" \
+        CROSS_COMPILE=~/TC/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-gnu-7.5/bin/aarch64-linux-gnu- \
+        CROSS_COMPILE_ARM32=~/TC/prebuilts/gcc/linux-x86/arm/arm-linux-gnueabihf-7.5/bin/arm-linux-gnueabihf- \
+        CLANG_TRIPLE=~/TC/proton-clang/bin/aarch64-linux-gnu-
