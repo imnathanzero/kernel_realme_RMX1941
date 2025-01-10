@@ -42,13 +42,13 @@ jobs:
         run: |
          git clone https://github.com/Frostleaft07/AnyKernel3 -b rmx1941 ~/any/ && \
          cp -r ~/out/arch/arm64/boot/Image.gz-dtb ~/any/ && \
-         cd ~/any/ && zip -r9 buildtestC2.zip *
+         cd ~/any/ && zip -r9 kranul1941.zip *
 
       - name: Upload to Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-             ~/any/*.zip
+             ~/any/kranul1941.zip
           name: build_kranul_yang_ke_${{ github.run_attempt }}
           tag_name: ${{ github.run_id }}
           body: |
