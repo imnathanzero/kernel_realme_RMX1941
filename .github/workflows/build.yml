@@ -11,7 +11,7 @@ defaults:
 
 jobs:
  buildtest:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -24,19 +24,19 @@ jobs:
 
       - name: setup package
         run: |
-         sudo apt-get update -y && sudo apt-get install dialog bash sed wget git curl zip tar jq expect make cmake automake autoconf llvm lld lldb clang gcc binutils bison perl gperf gawk flex bc python3 zstd openssl unzip cpio bc bison build-essential ccache liblz4-tool libsdl1.2-dev libstdc++6 libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zlib1g-dev libncurses5-dev bzip2 git gcc g++ libssl-dev gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi dos2unix kmod python2 -y
+         sudo apt-get update -y && sudo apt-get install dialog bash sed wget git curl zip tar jq expect make cmake automake autoconf llvm lld lldb clang gcc binutils bison perl gperf gawk flex bc python3 zstd openssl unzip cpio bc bison build-essential ccache liblz4-tool libsdl1.2-dev libstdc++6 libxml2 libxml2-utils lzop pngcrush schedtool squashfs-tools xsltproc zlib1g-dev libncurses5-dev bzip2 git gcc g++ libssl-dev gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf gcc-arm-linux-gnueabi dos2unix kmod -y
 
       - name: setup toolchain
         run: |
          bash tcsetup
-        
+
       - name: cloning KernelSU
         run: |
-         curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/refs/heads/next/kernel/setup.sh" | bash -s next
-         
+         curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/refs/heads/next-susfs/kernel/setup.sh" | bash -s next-susfs
+
       - name: start up
         run: |
-         sudo apt update -y;sudo apt upgrade -y;sudo apt install libc6 -y;sudo apt-get install zlib1g-dev libtinfo-dev -y
+
          bash build
 
       - name: anykernel ~ zipping
@@ -61,4 +61,4 @@ jobs:
         with:
           name: debug_${{ github.actor }}@${{ github.run_id }}
           path: AnyKernel3/*
-          
+
