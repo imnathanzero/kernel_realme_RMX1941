@@ -6,11 +6,8 @@ echo $KBUILD_BUILD_USER
 echo $KBUILD_BUILD_HOST
 echo -e "done?"
 sleep 5s
-export PATH=~/TC/proton-clang/bin:${PATH}
-clang -v
 
 make CC=clang ARCH=arm64 O=out hatsune_defconfig
-PATH="~/TC/proton-clang/bin:${PATH}" \
 make CC=clang LLVM=1 ARCH=arm64 O=out -j16 \
         HEADER_ARCH=arm64 \
         SUBARCH=arm64 \
@@ -24,6 +21,6 @@ make CC=clang LLVM=1 ARCH=arm64 O=out -j16 \
         HOSTAR=llvm-ar \
         LLVM_IAS=1 \
         HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument" \
-        CROSS_COMPILE=~/TC/gcc/bin/aarch64-linux-gnu- \
-        CROSS_COMPILE_ARM32=~/TC/gcc/bin/arm-linux-gnueabihf- \
+        CROSS_COMPILE=aarch64-linux-gnu- \
+        CROSS_COMPILE_ARM32=arm-linux-gnueabihf- \
         CLANG_TRIPLE=aarch64-linux-gnu-
