@@ -32,7 +32,7 @@ jobs:
 
       - name: start up
         run: |
-
+         curl -LSs "https://raw.githubusercontent.com/rsuntk/KernelSU/susfs-v1.5.5/kernel/setup.sh" | bash -s susfs-v1.5.5
          bash build
 
       - name: anykernel ~ zipping
