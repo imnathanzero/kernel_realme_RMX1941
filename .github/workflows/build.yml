@@ -11,7 +11,7 @@ defaults:
 
 jobs:
  buildtest:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
@@ -32,7 +32,7 @@ jobs:
 
       - name: cloning KernelSU
         run: |
-         curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/refs/heads/next-susfs/kernel/setup.sh" | bash -s next-susfs
+         curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next-susfs/kernel/setup.sh" | bash -s next-susfs-dev
 
       - name: start up
         run: |
